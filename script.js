@@ -28,10 +28,15 @@ window.onload = function () {
             tile.addEventListener("dragend", dragEnd);      
 
             document.getElementById("board").append(tile);
+            document.querySelector('.restart-button').addEventListener('click', function() {
+                window.location.reload();
+              });
+              
 
         }
     }
 }
+
 
 function dragStart() {
     currTile = this; 
