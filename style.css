@@ -1,79 +1,84 @@
+/* Layout for login widget */
 #bedrock-login-widget {
-    display: flex; /* Removed !important. JavaScript will now control this. */
-    /* Keep other styles for the login widget if needed, e.g., for centering it initially */
-    width: 100%; /* Example: ensure it takes space if flex items inside need it */
-    justify-content: center; /* Example: center the login panel if body is not doing it */
-    align-items: center; /* Example: center the login panel */
-    /* min-height: 100vh; */ /* This might be better on the body for initial view */
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    /* min-height: 100vh; */
 }
 
+/* Main game content initially hidden */
 #main-game-content {
-    display: none; /* Removed !important. JavaScript will set this to block/flex/grid. */
-                     /* It's okay for this to be 'none' initially. */
+    display: none;
 }
 
+/* Body layout for initial login page */
 body {
-    /* These styles are for the initial login page view */
-    display: flex !important; 
+    display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     min-height: 100vh !important;
-    margin: 0; /* Good practice to reset default margin */
-    /* background-color: #f0f0f0; */ /* Example initial background for login page */
+    margin: 0;
+    /* background-color: #f0f0f0; */
 }
 
+/* Logo and image styling */
 .image {
-    text-align: center; /* Centers the logo if it's an inline or inline-block element */
+    text-align: center;
     margin-bottom: 20px;
 }
 
 .logo {
-    max-width: 200px; /* Adjust as needed */
+    max-width: 200px;
     height: auto;
 }
 
+/* Gamezone layout */
 .gamezone {
-    display: flex; /* If you want rules and game side-by-side */
-    justify-content: space-around; /* Example spacing */
+    display: flex;
+    justify-content: space-around;
     align-items: flex-start;
     padding: 20px;
-    gap: 20px; /* Space between rules and game */
+    gap: 20px;
 }
 
-.rules, .game {
+/* Rules and game panels */
+.rules,
+.game {
     border: 1px solid #ccc;
     padding: 15px;
     border-radius: 8px;
-    background-color: #f9f9f9; /* Light background for these sections */
+    background-color: #f9f9f9;
 }
 
 .rules {
-    flex-basis: 30%; /* Example width */
+    flex-basis: 30%;
 }
 
 .game {
-    flex-basis: 65%; /* Example width */
+    flex-basis: 65%;
 }
 
+/* Puzzle board styling */
 #board {
     display: grid;
-    grid-template-columns: repeat(3, 100px); /* Adjust for your puzzle size */
-    grid-template-rows: repeat(3, 100px);    /* Adjust for your puzzle size */
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
     gap: 5px;
     border: 2px solid #333;
-    width: 310px; /* Adjust based on columns and gap */
-    height: 310px; /* Adjust based on rows and gap */
-    margin: 0 auto 20px auto; /* Center the board and add margin below */
+    width: 310px;
+    height: 310px;
+    margin: 0 auto 20px auto;
 }
 
 #board img {
-    width: 100px; /* Should match grid cell size */
-    height: 100px; /* Should match grid cell size */
+    width: 100px;
+    height: 100px;
     border: 1px solid #ddd;
-    object-fit: cover; /* Ensures images cover the tile area */
+    object-fit: cover;
 }
 
-
+/* Score and restart button */
 .score {
     text-align: center;
     margin-top: 10px;
@@ -83,7 +88,7 @@ body {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #4CAF50; /* Green */
+    background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 5px;
@@ -93,13 +98,13 @@ body {
     background-color: #45a049;
 }
 
-/* Ensure the login widget itself has a contrasting background if the body is black */
-/* The panelClass: '... bg-white' in the JS config for Bedrock.LoginPanel helps with this */
-/* #bedrock-login-widget .container { Example if Tailwind's bg-white isn't enough or you want more control */
-    /* background-color: white; */ /* Already handled by panelClass */
-    /* padding: 20px; */
-    /* border-radius: 8px; */
-    /* box-shadow: 0 0 10px rgba(0,0,0,0.5); */ /* Optional shadow for the widget */
-/* } */
+/* Optional: Login widget panel customization
+#bedrock-login-widget .container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+*/
 
 /* Add any other styles you have for .image, .gamezone, .rules, .game, #board, etc. */
