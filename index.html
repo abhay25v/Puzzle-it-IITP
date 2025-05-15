@@ -52,42 +52,45 @@
     <script>
       (function () {
         const bedrockConfig = {
-          baseUrl: 'https://api.bedrockpassport.com', // Base API URL – no need to change this. Leave as is.
-          authCallbackUrl: window.location.origin, // For production, ensure you have a dedicated auth callback page (e.g. /auth/callback)
-          tenantId: 'orange-fmz1nhlf03', // Your assigned tenant ID
-          subscriptionKey: 'a166de140aad408595cbb5fefc9f2059', // Your assigned API Key
+          baseUrl: 'https://api.bedrockpassport.com',
+          authCallbackUrl: window.location.origin,
+          tenantId: 'orange-fmz1nhlf03',
+          subscriptionKey: 'a166de140aad408595cbb5fefc9f2059',
         };
 
         const mainGameContent = document.getElementById('main-game-content');
         const loginWidgetContainer = document.getElementById('bedrock-login-widget');
 
         function handleLoginSuccess() {
-          // The following .setProperty calls with 'important' are to help override
-          // potentially conflicting CSS rules in style.css.
-          // Ideally, style.css should be checked and corrected to avoid needing '!important' here.
+          console.log('handleLoginSuccess function called.'); // Check browser console
+
           if (mainGameContent) {
-            mainGameContent.style.setProperty('display', 'block', 'important'); // Or 'flex', 'grid' depending on your game layout
+            console.log('Attempting to show main-game-content.');
+            mainGameContent.style.setProperty('display', 'block', 'important');
+          } else {
+            console.error('main-game-content element not found in handleLoginSuccess.');
           }
+
           if (loginWidgetContainer) {
+            console.log('Attempting to hide bedrock-login-widget.');
             loginWidgetContainer.style.setProperty('display', 'none', 'important');
+          } else {
+            console.error('bedrock-login-widget element not found in handleLoginSuccess.');
           }
           
-          // Change body styles after login
-          document.body.style.setProperty('background-color', '#ADD8E6', 'important'); // Example: Light Blue
-          document.body.style.setProperty('background-image', 'none', 'important'); // Remove any login-specific background image
-          
-          // Reset body display properties to ensure it doesn't interfere with game content layout
+          console.log('Attempting to change body styles.');
+          document.body.style.setProperty('background-color', '#ADD8E6', 'important');
+          document.body.style.setProperty('background-image', 'none', 'important');
           document.body.style.setProperty('display', 'block', 'important'); 
           document.body.style.setProperty('justify-content', 'initial', 'important');
           document.body.style.setProperty('align-items', 'initial', 'important');
-          document.body.style.setProperty('min-height', 'auto', 'important'); // Reset min-height if set for login page
+          document.body.style.setProperty('min-height', 'auto', 'important');
+          console.log('Body styles modification attempted.');
         }
 
         const container = document.getElementById('bedrock-login-widget');
         if (container) {
             const root = ReactDOM.createRoot(container);
-
-            // Render login widget
             root.render(
               React.createElement(
                 Bedrock.BedrockPassportProvider,
@@ -97,18 +100,15 @@
                   logo: 'https://irp.cdn-website.com/e81c109a/dms3rep/multi/orange-web3-logo-v2a-20241018.svg',
                   logoAlt: 'Orange Web3',
                   walletButtonText: 'Connect Wallet',
-                  showConnectWallet: false, // Set to true if you want this
+                  showConnectWallet: false,
                   separatorText: 'OR',
                   onLoginSuccess: handleLoginSuccess,
-
                   features: {
                     enableWalletConnect: false,
                     enableAppleLogin: true,
                     enableGoogleLogin: true,
-                    enableEmailLogin: false, // Set to true if you want this
+                    enableEmailLogin: false,
                   },
-
-                  // Optional: Style options for the widget itself
                   titleClass: 'text-xl font-bold text-black',
                   logoClass: 'ml-2 md:h-8 h-6',
                   panelClass: 'container p-2 md:p-8 rounded-2xl max-w-[480px] bg-white',
@@ -121,7 +121,7 @@
               )
             );
         } else {
-            console.error('Login widget container not found');
+            console.error('Login widget container (bedrock-login-widget) not found for initial rendering.');
         }
       })();
     </script>

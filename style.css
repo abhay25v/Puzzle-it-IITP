@@ -1,14 +1,25 @@
 #bedrock-login-widget {
-    display: flex !important; /* This would override the JavaScript trying to set display: none; */
+    display: flex; /* Removed !important. JavaScript will now control this. */
+    /* Keep other styles for the login widget if needed, e.g., for centering it initially */
+    width: 100%; /* Example: ensure it takes space if flex items inside need it */
+    justify-content: center; /* Example: center the login panel if body is not doing it */
+    align-items: center; /* Example: center the login panel */
+    /* min-height: 100vh; */ /* This might be better on the body for initial view */
 }
+
 #main-game-content {
-    display: none !important; /* This would override the JavaScript trying to set display: block; */
+    display: none; /* Removed !important. JavaScript will set this to block/flex/grid. */
+                     /* It's okay for this to be 'none' initially. */
 }
+
 body {
-    display: flex !important; /* This might conflict with document.body.style.display = 'block'; */
+    /* These styles are for the initial login page view */
+    display: flex !important; 
     align-items: center !important;
     justify-content: center !important;
     min-height: 100vh !important;
+    margin: 0; /* Good practice to reset default margin */
+    /* background-color: #f0f0f0; */ /* Example initial background for login page */
 }
 
 .image {
