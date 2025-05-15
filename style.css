@@ -1,27 +1,14 @@
-body {
-  background-color: black; /* Initial background for login page */
-  color: #333; /* Default text color, adjust as needed */
-  font-family: Arial, sans-serif; /* Example font */
-  margin: 0;
-  padding: 0;
-  display: flex; /* For centering the login widget */
-  justify-content: center; /* For centering the login widget */
-  align-items: center; /* For centering the login widget */
-  min-height: 100vh; /* Ensure full viewport height for centering */
-  transition: background-color 0.5s ease; /* Smooth background transition */
+#bedrock-login-widget {
+    display: flex !important; /* This would override the JavaScript trying to set display: none; */
 }
-
-/* Styles for your main game content - these will apply once it's visible */
 #main-game-content {
-  /* 
-    If you changed body display to 'block' after login, 
-    this content will now behave like a normal block element.
-    Add specific layout styles for your game here.
-    For example, if you want its own background:
-  */
-  /* background-color: #yourPreferredBlue; */ /* Or whatever your game page background should be */
-  width: 100%; /* Example: make it take full width */
-  /* Add other layout styles as needed */
+    display: none !important; /* This would override the JavaScript trying to set display: block; */
+}
+body {
+    display: flex !important; /* This might conflict with document.body.style.display = 'block'; */
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 100vh !important;
 }
 
 .image {
@@ -97,11 +84,11 @@ body {
 
 /* Ensure the login widget itself has a contrasting background if the body is black */
 /* The panelClass: '... bg-white' in the JS config for Bedrock.LoginPanel helps with this */
-#bedrock-login-widget .container { /* Example if Tailwind's bg-white isn't enough or you want more control */
+/* #bedrock-login-widget .container { Example if Tailwind's bg-white isn't enough or you want more control */
     /* background-color: white; */ /* Already handled by panelClass */
     /* padding: 20px; */
     /* border-radius: 8px; */
     /* box-shadow: 0 0 10px rgba(0,0,0,0.5); */ /* Optional shadow for the widget */
-}
+/* } */
 
 /* Add any other styles you have for .image, .gamezone, .rules, .game, #board, etc. */

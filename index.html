@@ -6,12 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IIT-P Puzzle</title>
     <link rel="stylesheet" href="style.css">
-    <!-- 
-      It's generally better to put styles in style.css, 
-      but if you need to ensure body styles are applied immediately for the login page,
-      you could put the initial body styles here in a <style> tag.
-      However, for this solution, we'll keep them in style.css and modify via JS.
-    -->
 </head>
 
 <body>
@@ -68,18 +62,25 @@
         const loginWidgetContainer = document.getElementById('bedrock-login-widget');
 
         function handleLoginSuccess() {
+          // The following .setProperty calls with 'important' are to help override
+          // potentially conflicting CSS rules in style.css.
+          // Ideally, style.css should be checked and corrected to avoid needing '!important' here.
           if (mainGameContent) {
-            mainGameContent.style.display = 'block'; // Or 'flex', 'grid' depending on your layout
+            mainGameContent.style.setProperty('display', 'block', 'important'); // Or 'flex', 'grid' depending on your game layout
           }
           if (loginWidgetContainer) {
-            loginWidgetContainer.style.display = 'none';
+            loginWidgetContainer.style.setProperty('display', 'none', 'important');
           }
-          // Change body background color after login and remove centering if needed
-          document.body.style.backgroundColor = '#ADD8E6'; // Example: Light Blue
-          // If you want the game content to not be centered by the body's flex anymore:
-          document.body.style.display = 'block'; // Or remove flex properties individually
-          // document.body.style.justifyContent = 'initial';
-          // document.body.style.alignItems = 'initial';
+          
+          // Change body styles after login
+          document.body.style.setProperty('background-color', '#ADD8E6', 'important'); // Example: Light Blue
+          document.body.style.setProperty('background-image', 'none', 'important'); // Remove any login-specific background image
+          
+          // Reset body display properties to ensure it doesn't interfere with game content layout
+          document.body.style.setProperty('display', 'block', 'important'); 
+          document.body.style.setProperty('justify-content', 'initial', 'important');
+          document.body.style.setProperty('align-items', 'initial', 'important');
+          document.body.style.setProperty('min-height', 'auto', 'important'); // Reset min-height if set for login page
         }
 
         const container = document.getElementById('bedrock-login-widget');
@@ -110,10 +111,10 @@
                   // Optional: Style options for the widget itself
                   titleClass: 'text-xl font-bold text-black',
                   logoClass: 'ml-2 md:h-8 h-6',
-                  panelClass: 'container p-2 md:p-8 rounded-2xl max-w-[480px] bg-white', // Added bg-white for contrast on black
+                  panelClass: 'container p-2 md:p-8 rounded-2xl max-w-[480px] bg-white',
                   buttonClass: 'hover:border-orange-500',
-                  separatorTextClass: 'text-gray-500', // Removed bg-orange-900 if panel is white
-                  separatorClass: '', // Removed bg-orange-900
+                  separatorTextClass: 'text-gray-500',
+                  separatorClass: '',
                   linkRowClass: 'justify-center',
                   headerClass: 'justify-center',
                 })
