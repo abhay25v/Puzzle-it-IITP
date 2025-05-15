@@ -23,8 +23,7 @@
                 <img src="images/library.png" width="300px" alt="">
             </div>
             <div class="game">
-                <div id="board">
-                </div>
+                <div id="board"></div>
                 <div class="score">
                     <h1>Turns: <span id="turns">0</span></h1>
                     <button class="restart-button">Restart</button>
@@ -32,7 +31,7 @@
             </div>
         </div>
     </div>
-    
+
     <script src="script.js"></script>
 
     <!-- 1. Create a container for the widget -->
@@ -44,86 +43,89 @@
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://public-cdn-files.pages.dev/bedrock-passport.umd.js"></script>
-
-    <!-- Optional: Include Tailwind CSS for styling if the widget uses it internally or you want to use Tailwind classes -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- 3. Initialize the widget -->
     <script>
-      (function () {
-        const bedrockConfig = {
-          baseUrl: 'https://api.bedrockpassport.com',
-          authCallbackUrl: window.location.origin,
-          tenantId: 'orange-fmz1nhlf03',
-          subscriptionKey: 'a166de140aad408595cbb5fefc9f2059',
-        };
-
-        const mainGameContent = document.getElementById('main-game-content');
-        const loginWidgetContainer = document.getElementById('bedrock-login-widget');
-
-        function handleLoginSuccess() {
-          console.log('handleLoginSuccess function called.'); // Check browser console
-
-          if (mainGameContent) {
-            console.log('Attempting to show main-game-content.');
-            mainGameContent.style.setProperty('display', 'block', 'important');
-          } else {
-            console.error('main-game-content element not found in handleLoginSuccess.');
-          }
-
-          if (loginWidgetContainer) {
-            console.log('Attempting to hide bedrock-login-widget.');
-            loginWidgetContainer.style.setProperty('display', 'none', 'important');
-          } else {
-            console.error('bedrock-login-widget element not found in handleLoginSuccess.');
-          }
-          
-          console.log('Attempting to change body styles.');
-          document.body.style.setProperty('background-color', '#ADD8E6', 'important');
-          document.body.style.setProperty('background-image', 'none', 'important');
-          document.body.style.setProperty('display', 'block', 'important'); 
-          document.body.style.setProperty('justify-content', 'initial', 'important');
-          document.body.style.setProperty('align-items', 'initial', 'important');
-          document.body.style.setProperty('min-height', 'auto', 'important');
-          console.log('Body styles modification attempted.');
+        if (window.location.search.includes('token=')) {
+            document.getElementById('main-game-content').style.display = 'block';
+            document.getElementById('bedrock-login-widget').style.display = 'none';
         }
+        (function () {
+            const bedrockConfig = {
+                baseUrl: 'https://api.bedrockpassport.com',
+                authCallbackUrl: window.location.origin,
+                tenantId: 'orange-fmz1nhlf03',
+                subscriptionKey: 'a166de140aad408595cbb5fefc9f2059',
+            };
 
-        const container = document.getElementById('bedrock-login-widget');
-        if (container) {
-            const root = ReactDOM.createRoot(container);
-            root.render(
-              React.createElement(
-                Bedrock.BedrockPassportProvider,
-                bedrockConfig,
-                React.createElement(Bedrock.LoginPanel, {
-                  title: 'Sign in to',
-                  logo: 'https://irp.cdn-website.com/e81c109a/dms3rep/multi/orange-web3-logo-v2a-20241018.svg',
-                  logoAlt: 'Orange Web3',
-                  walletButtonText: 'Connect Wallet',
-                  showConnectWallet: false,
-                  separatorText: 'OR',
-                  onLoginSuccess: handleLoginSuccess,
-                  features: {
-                    enableWalletConnect: false,
-                    enableAppleLogin: true,
-                    enableGoogleLogin: true,
-                    enableEmailLogin: false,
-                  },
-                  titleClass: 'text-xl font-bold text-black',
-                  logoClass: 'ml-2 md:h-8 h-6',
-                  panelClass: 'container p-2 md:p-8 rounded-2xl max-w-[480px] bg-white',
-                  buttonClass: 'hover:border-orange-500',
-                  separatorTextClass: 'text-gray-500',
-                  separatorClass: '',
-                  linkRowClass: 'justify-center',
-                  headerClass: 'justify-center',
-                })
-              )
-            );
-        } else {
-            console.error('Login widget container (bedrock-login-widget) not found for initial rendering.');
-        }
-      })();
+            const mainGameContent = document.getElementById('main-game-content');
+            const loginWidgetContainer = document.getElementById('bedrock-login-widget');
+
+            function handleLoginSuccess() {
+                console.log('handleLoginSuccess function called.');
+
+                if (mainGameContent) {
+                    console.log('Attempting to show main-game-content.');
+                    mainGameContent.style.display = 'block';
+                } else {
+                    console.error('main-game-content element not found in handleLoginSuccess.');
+                }
+
+                if (loginWidgetContainer) {
+                    console.log('Attempting to hide bedrock-login-widget.');
+                    loginWidgetContainer.style.display = 'none';
+                } else {
+                    console.error('bedrock-login-widget element not found in handleLoginSuccess.');
+                }
+
+                // Optional: Change body styles after login
+                document.body.style.backgroundColor = '#ADD8E6';
+                document.body.style.backgroundImage = 'none';
+                document.body.style.display = 'block';
+                document.body.style.justifyContent = 'initial';
+                document.body.style.alignItems = 'initial';
+                document.body.style.minHeight = 'auto';
+                console.log('Body styles modification attempted.');
+            }
+
+            const container = document.getElementById('bedrock-login-widget');
+            if (container) {
+                const root = ReactDOM.createRoot(container);
+                root.render(
+                    React.createElement(
+                        Bedrock.BedrockPassportProvider,
+                        bedrockConfig,
+                        React.createElement(Bedrock.LoginPanel, {
+                            title: 'Sign in to',
+                            logo: 'https://irp.cdn-website.com/e81c109a/dms3rep/multi/orange-web3-logo-v2a-20241018.svg',
+                            logoAlt: 'Orange Web3',
+                            walletButtonText: 'Connect Wallet',
+                            showConnectWallet: false,
+                            separatorText: 'OR',
+                            onLoginSuccess: handleLoginSuccess,
+                            features: {
+                                enableWalletConnect: false,
+                                enableAppleLogin: true,
+                                enableGoogleLogin: true,
+                                enableEmailLogin: false,
+                            },
+                            titleClass: 'text-xl font-bold text-black',
+                            logoClass: 'ml-2 md:h-8 h-6',
+                            panelClass: 'container p-2 md:p-8 rounded-2xl max-w-[480px] bg-white',
+                            buttonClass: 'hover:border-orange-500',
+                            separatorTextClass: 'text-gray-500',
+                            separatorClass: '',
+                            linkRowClass: 'justify-center',
+                            headerClass: 'justify-center',
+                        })
+                    )
+                );
+            } else {
+                console.error('Login widget container (bedrock-login-widget) not found for initial rendering.');
+            }
+        })();
     </script>
 </body>
+
 </html>
